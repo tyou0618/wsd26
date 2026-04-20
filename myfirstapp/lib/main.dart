@@ -10,10 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'title',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
+      title: 'first App',
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.pink)),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -21,6 +19,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -29,12 +28,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,26 +38,65 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          Row(
-            children: [
-              Placeholder(),
-              Column(
-                children: [
-                  Placeholder(),
-                  Placeholder(),
-                  Placeholder(),
-                  Placeholder(),
-                ],
-              )
-            ],
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                //Expanded(flex: 2, child: Text("count: $_counter")),
+                Expanded(
+                  flex: 2,
+                  child: Image.network(
+                    "https://picsum.photos/seed/$_counter/400/300",
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: FittedBox(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _counter++;
+                              });
+                            },
+                            child: Icon(Icons.plus_one),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: FittedBox(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _counter--;
+                              });
+                            },
+                            child: Icon(Icons.exposure_neg_1),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: FittedBox(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _counter = 0;
+                              });
+                            },
+                            child: Icon(Icons.exposure_zero),
+                          ),
+                        ),
+                      ),
+                      Expanded(child: Placeholder()),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-          Placeholder()
+          Expanded(child: Placeholder()),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
