@@ -101,7 +101,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                       ),
-                      Expanded(child: Placeholder()),
+                      Expanded(
+                        child: Text(
+                          "Count: $_counter",
+                          style: const TextStyle(color: Colors.black, fontSize: 40),
+                        )),
                     ],
                   ),
                 ),
